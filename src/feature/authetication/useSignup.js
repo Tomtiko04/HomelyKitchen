@@ -19,7 +19,8 @@ export function useSignup() {
 		},
 		onError: (err) => {
 			toast.error(err.message)
-		}
+		},
+		retry: false,
 	});
 
 	return { signup, isSignup };

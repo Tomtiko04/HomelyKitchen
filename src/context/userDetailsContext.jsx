@@ -1,7 +1,7 @@
 import { createContext, useReducer } from "react";
 import PropTypes from "prop-types";
 
-export const UserContext = createContext();
+export const UserDetailsContext = createContext();
 
 const initialState = {
 	openPanel: false,
@@ -24,11 +24,11 @@ function reducer(state, action) {
 	}
 }
 
-UserProvider.propTypes = {
+UserDetailsProvider.propTypes = {
 	children: PropTypes.any,
 };
 
-export default function UserProvider({ children }) {
+export default function UserDetailsProvider({ children }) {
 	const [state, dispatch] = useReducer(reducer, initialState);
-	return <UserContext.Provider value={{ state, dispatch }}>{children}</UserContext.Provider>;
+	return <UserDetailsContext.Provider value={{ state, dispatch }}>{children}</UserDetailsContext.Provider>;
 }

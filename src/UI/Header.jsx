@@ -1,4 +1,4 @@
-import {  useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { HiBars3BottomRight } from "react-icons/hi2";
 import { useEffect, useState } from "react";
 import { LiaCartPlusSolid, LiaUserCircle } from "react-icons/lia";
@@ -9,38 +9,43 @@ import Cookies from "js-cookie";
 
 export default function Header() {
 	const [isOpen, setIsOpen] = useState(false);
-	const [activeLink, setActiveLink] = useState(window.location.hash);
+	const [activeLink, setActiveLink] = useState("");
 	const navigate = useNavigate();
 	const location = useLocation();
-	const isMenusPage = location.pathname === "/menus/all" || location.pathname === "/cart";
+	const [isMenusPage, setIsMenusPage] = useState(false);
 	const { cart } = useCart();
 	const { dispatch } = useUser();
 	const isAuthenticated = Cookies.get("authenticated");
 
-	console.log(isOpen);
+	useEffect(() => {
+		setIsMenusPage(location.pathname === "/menus/all" || location.pathname === "/cart");
+	}, [location.pathname]);
+
+	function handleNavigate(path, hash = null) {
+		navigate(path);
+		if (hash) {
+			setActiveLink(hash);
+		}
+		setIsOpen(false);
+	}
+
+	function handleCart(path) {
+		navigate(path, {replace: true});
+		setIsOpen(false);
+	}
 
 	useEffect(function () {
 		const checkScreenSize = () => {
 			if (window.innerWidth >= 1024) {
-				setIsOpen(false);
-			} else {
 				setIsOpen(true);
+			} else {
+				setIsOpen(false);
 			}
 		};
 		checkScreenSize();
 		window.addEventListener("resize", checkScreenSize);
 		return () => window.removeEventListener("resize", checkScreenSize);
 	}, []);
-
-	// useEffect(() => {
-	// 	const handleHashChange = () => {
-	// 		setActiveLink(window.location.hash);
-	// 	};
-	// 	window.addEventListener("hashchange", handleHashChange);
-	// 	return () => {
-	// 		window.removeEventListener("hashchange", handleHashChange);
-	// 	};
-	// }, []);
 
 	useEffect(() => {
 		const handleHashChange = () => {
@@ -59,61 +64,6 @@ export default function Header() {
 		};
 	}, []);
 
-	// useEffect(() => {
-	// 	const sections = document.querySelectorAll("section");
-	// 	const navLinks = document.querySelectorAll("nav a");
-
-	// 	const observer = new IntersectionObserver(
-	// 		(entries) => {
-	// 			entries.forEach((entry) => {
-	// 				if (entry.isIntersecting) {
-	// 					const id = entry.target.getAttribute("id");
-	// 					const activeLink = document.querySelector(`nav a[href="#${id}"]`);
-	// 					navLinks.forEach((link) => link.classList.remove("active"));
-	// 					activeLink.classList.add("active");
-	// 				}
-	// 			});
-	// 		},
-	// 		{ threshold: 0.1 }
-	// 	);
-
-	// 	sections.forEach((section) => observer.observe(section));
-
-	// 	return () => {
-	// 		sections.forEach((section) => observer.unobserve(section));
-	// 	};
-	// }, []);
-
-	/////////////////////////////////////together with this
-	// useEffect(() => {
-	// 	const observer = new IntersectionObserver(
-	// 		(entries) => {
-	// 			entries.forEach((entry) => {
-	// 				if (entry.isIntersecting) {
-	// 					setActiveLink("#" + entry.target.id);
-	// 				}
-	// 			});
-	// 		},
-	// 		{ threshold: 0.1 }
-	// 	);
-
-	// 	const sections = document.querySelectorAll("section");
-	// 	sections.forEach((section) => observer.observe(section));
-
-	// 	return () => {
-	// 		sections.forEach((section) => observer.unobserve(section));
-	// 	};
-	// }, []);
-
-	////////////////////////////////////////////with this
-	// useEffect(() => {
-	// 	const section = document.querySelector(activeLink);
-	// 	if (section) {
-	// 		section.scrollIntoView({ behavior: "smooth" });
-	// 	}
-	// }, [activeLink]);
-
-
 	return (
 		<nav className="bg-orange-100 fixed top-0 w-full z-50">
 			<div className="max-w-7xl mx-auto px-5 sm:px-14 xl:px-[5.6em]">
@@ -121,7 +71,7 @@ export default function Header() {
 					<div className="flex justify-between items-center lg:mb-0">
 						<img
 							src="/logo.svg"
-							onClick={() => navigate("/home")}
+							onClick={() => handleNavigate("/home")}
 							className="cursor-pointer"
 						/>
 						<div
@@ -130,7 +80,7 @@ export default function Header() {
 							<HiBars3BottomRight />
 						</div>
 					</div>
-					<div className={isOpen ? "hidden" : "block"}>
+					<div className={`lg:flex ${isOpen ? "block" : "hidden"}`}>
 						<ul className="lg:flex lg:justify-between lg:items-center lg:flex-row flex flex-col mt-3 lg:mt-0 lg:gap-x-0 lg:gap-y-0 gap-y-2">
 							<li
 								className={
@@ -138,7 +88,7 @@ export default function Header() {
 										? "text-orange-500 hover:opacity-75 text-base font-semibold lg:px-4 lg:hover:bg-transparent sm:hover:bg-orange-500 p-2 lg:p-0 rounded-md"
 										: "text-black hover:opacity-75 text-base font-semibold lg:px-4 lg:hover:bg-transparent sm:hover:bg-orange-500 p-2 lg:p-0 rounded-md"
 								}>
-								<a href="#home" onClick={() => {setActiveLink("#home"); setIsOpen(!isOpen)}}>
+								<a href="#home" onClick={() => handleNavigate("/home", "#home")}>
 									Home
 								</a>
 							</li>
@@ -150,8 +100,7 @@ export default function Header() {
 												? "text-orange-500 hover:opacity-75 text-base font-semibold lg:px-4 lg:hover:bg-transparent sm:hover:bg-orange-500 p-2 lg:p-0 rounded-md"
 												: "text-black hover:opacity-75 text-base font-semibold lg:px-4 lg:hover:bg-transparent sm:hover:bg-orange-500 p-2 lg:p-0 rounded-md"
 										}>
-										<a href="#whyChooseUs" onClick={() => {setActiveLink("#whyChooseUs");
-										setIsOpen(!isOpen);}}>
+										<a href="#whyChooseUs" onClick={() => handleNavigate("/home", "#whyChooseUs")}>
 											Why choose us
 										</a>
 									</li>
@@ -159,11 +108,12 @@ export default function Header() {
 										className={
 											activeLink === "#ourDishes"
 												? "text-orange-500 hover:opacity-75 text-base font-semibold lg:px-4 lg:hover:bg-transparent sm:hover:bg-orange-500 p-2 lg:p-0 rounded-md"
-												: "text-black hover:opacity-75 text-base font-semibold lg:px-4 lg:hover:bg-transparent sm:hover:bg-orange-500 p-2 lg:p-0 rounded-md"
+												: "text-black hover:opacity-75 text-base font-semibold lg:px-4 lg:hover:bg-transparent sm:hover:bg-orange-500 p-2 lg:p-0 rounded-md cursor-pointer"
 										}>
-										<a href="#ourDishes" onClick={() => {setActiveLink("#ourDishes"); setIsOpen(!isOpen)}}>
+										<a href="#ourDishes" onClick={() => handleCart("/menus/all")}>
 											Our Dishes
 										</a>
+										{/* <a href="/menus/all">Our Dishes</a> */}
 									</li>
 									<li
 										className={
@@ -171,7 +121,7 @@ export default function Header() {
 												? "text-orange-500 hover:opacity-75 text-base font-semibold lg:px-4 lg:hover:bg-transparent sm:hover:bg-orange-500 p-2 lg:p-0 rounded-md"
 												: "text-black hover:opacity-75 text-base font-semibold lg:px-4 lg:hover:bg-transparent sm:hover:bg-orange-500 p-2 lg:p-0 rounded-md"
 										}>
-										<a href="#aboutUs" onClick={() => {setActiveLink("#aboutUs"); setIsOpen(!isOpen)}}>
+										<a href="#aboutUs" onClick={() => handleNavigate("/home", "#aboutUs")}>
 											About us
 										</a>
 									</li>
@@ -181,7 +131,9 @@ export default function Header() {
 												? "text-orange-500 hover:opacity-75 text-base font-semibold lg:px-4 lg:hover:bg-transparent sm:hover:bg-orange-500 p-2 lg:p-0 rounded-md"
 												: "text-black hover:opacity-75 text-base font-semibold lg:px-4 lg:hover:bg-transparent sm:hover:bg-orange-500 p-2 lg:p-0 rounded-md"
 										}>
-										<a href="#testimonials" onClick={() => {setActiveLink("#testimonials"); setIsOpen(!isOpen)}}>
+										<a
+											href="#testimonials"
+											onClick={() => handleNavigate("/home", "#testimonials")}>
 											Testimonials
 										</a>
 									</li>
@@ -190,20 +142,20 @@ export default function Header() {
 							{!isAuthenticated && (
 								<div className="lg:flex lg:justify-between lg:flex-row lg:items-center lg:gap-x-4 lg:gap-y-0 lg:ml-2 space-y-3 lg:space-y-0">
 									<button
-										className="bg-orange-500 px-5 py-2 block text-white rounded-lg text-center text-base  transition-colors duration-300 focus:bg-orange-100 focus:text-black focus:outline-none focus:ring focus:ring-orange-300 focus:ring-offset-2 font-semibold"
-										onClick={() => navigate("/auth/login")}>
+										className="bg-orange-500 px-5 py-2 block text-white rounded-lg text-center text-base transition-colors duration-300 focus:bg-orange-100 focus:text-black focus:outline-none focus:ring focus:ring-orange-300 focus:ring-offset-2 font-semibold"
+										onClick={() => handleNavigate("/auth/login")}>
 										Login
 									</button>
 									<button
-										className="bg-orange-500 px-5 py-2 block text-white rounded-lg text-center text-base  transition-colors duration-300 focus:bg-orange-100 focus:text-black focus:outline-none focus:ring focus:ring-orange-300 focus:ring-offset-2 font-semibold"
-										onClick={() => navigate("/auth/signup")}>
+										className="bg-orange-500 px-5 py-2 block text-white rounded-lg text-center text-base transition-colors duration-300 focus:bg-orange-100 focus:text-black focus:outline-none focus:ring focus:ring-orange-300 focus:ring-offset-2 font-semibold"
+										onClick={() => handleNavigate("/auth/signup")}>
 										Register
 									</button>
 								</div>
 							)}
 							{isAuthenticated === "authenticated" && (
 								<div className="flex justify-start my-3 lg:block lg:my-0">
-									<Button type="primary" onClick={() => {navigate("/cart"); setIsOpen(!isOpen)}}>
+									<Button type="primary" onClick={() => handleCart("/cart")}>
 										<div className="flex flex-row gap-x-1">
 											<LiaCartPlusSolid className="text-2xl" />
 											Cart
@@ -217,11 +169,11 @@ export default function Header() {
 							{isAuthenticated === "authenticated" && (
 								<div
 									className="text-orange-500 text-[4rem] lg:text-[3.1rem] cursor-pointer lg:ml-5"
-									onClick={() =>
+									onClick={() => {
 										dispatch({
 											type: "getDetails",
-										})
-									}>
+										});
+									}}>
 									<LiaUserCircle />
 								</div>
 							)}
@@ -231,8 +183,4 @@ export default function Header() {
 			</div>
 		</nav>
 	);
-}
-
-{
-	/* // TODO text-[#171717] */
 }

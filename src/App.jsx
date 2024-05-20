@@ -12,6 +12,7 @@ import MenusPage from "./pages/MenusPage";
 import { useEffect } from "react";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import CartPage from "./pages/CartPage";
+import ScrollToTop from "./UI/ScrollToTop";
 
 const queryClient = new QueryClient({
 	queryCache: new QueryCache({
@@ -48,14 +49,29 @@ function App() {
 			<QueryClientProvider client={queryClient}>
 				{/* <ReactQueryDevtools initialIsOpen={false} /> */}
 				<BrowserRouter>
+					<ScrollToTop />
 					<Routes>
 						<Route index element={<Navigate replace to="home" />} />
 						<Route path="auth/login" element={<Login />} />
 						<Route path="auth/signup" element={<Signup />} />
 						<Route element={<AppLayout />}>
 							<Route path="home" element={<LandingPage />} />
-							<Route path="menus/all" element={<ProtectedRoute><RedirectToMenusWithDefaultParams /></ProtectedRoute>}/>
-							<Route path="cart" element={<ProtectedRoute><CartPage /></ProtectedRoute>}/>
+							<Route
+								path="menus/all"
+								element={
+									<ProtectedRoute>
+										<RedirectToMenusWithDefaultParams />
+									</ProtectedRoute>
+								}
+							/>
+							<Route
+								path="cart"
+								element={
+									<ProtectedRoute>
+										<CartPage />
+									</ProtectedRoute>
+								}
+							/>
 						</Route>
 						<Route path="*" element={<PageNotFound />} />
 					</Routes>

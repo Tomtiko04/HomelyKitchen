@@ -4,17 +4,17 @@ import App from './App.jsx';
 import './index.css'
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallback from './UI/ErrorFallback.jsx';
-import UserProvider from './context/userContext.jsx';
+import UserDetailsProvider from './context/userDetailsContext.jsx';
 
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-	<React.StrictMode>
-		<UserProvider>
+	<UserDetailsProvider>
+		<React.StrictMode>
 			<ErrorBoundary FallbackComponent={ErrorFallback}>
 				<App />
 			</ErrorBoundary>
-		</UserProvider>
-	</React.StrictMode>
+		</React.StrictMode>
+	</UserDetailsProvider>
 );
 //Superbase Homely: OpPq1PtCCaHETGYy

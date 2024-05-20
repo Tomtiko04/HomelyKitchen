@@ -1,6 +1,9 @@
+import { useUser } from "../../context/useUser";
 import Button from "../../UI/Button";
+import UserPannelInfo from "../../UI/UserPannelInfo";
 
 export default function Home() {
+	const {state} = useUser();
   return (
 		<section className="xl:pt-32 lg:pt-24 pt-24 pb-5 px-5 sm:px-14 xl:px-[5.6em]" id="home">
 			<div className="flex flex-col gap-y-4 flex-wrap justify-items-center justify-between lg:flex-row">
@@ -15,14 +18,17 @@ export default function Home() {
 						Unleash the delicious possibilities of convenient and wholesome cuisine, catering to
 						your cravings anytime, anywhere!
 					</p>
-					<Button type="primary" style={{marginTop: '1rem'}}>
-						Order Now
-					</Button>
+					<div className="flex justify-start items-start mt-5">
+						<Button href="/menus/all" type="primary">
+							Order now
+						</Button>
+					</div>
 				</div>
 				<div className="max-w-md h-auto mx-auto flex justify-center items-center">
 					<img src="/hero-1.svg" alt="Hero-img" />
 				</div>
 			</div>
+			<div>{state.openPanel && <UserPannelInfo />}</div>
 		</section>
 	);
 }

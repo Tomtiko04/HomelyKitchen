@@ -5,7 +5,7 @@ function useDish(page){
     const { data, isLoading, error } = useQuery({
 			queryKey: ["dishes"],
 			queryFn: () => dishesApi(page),
-			retry: true,
+			retry: false,
 		});
 
     return {data, isLoading, error}

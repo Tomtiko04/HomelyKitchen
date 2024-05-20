@@ -27,6 +27,7 @@ export function useLogin() {
 		onError: (err) => {
 			toast.error(err.message);
 		},
+		retry: false,
 	});
 
 	return { login, isLogin};

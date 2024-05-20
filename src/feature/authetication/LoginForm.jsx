@@ -7,24 +7,24 @@ import Loader from "../../UI/Loader";
 
 
 export default function LoginForm() {
-	const {login, isLogin} = useLogin();
-	const [email, setEmail] = useState("ogunneyeoyinkansola@gmail.com");
-	const [password, setPassword] = useState("ogunneyerasheedat");
-	
-	function handleSubmit(e){
-	e.preventDefault();
-	login(
-		{ email, password },
-		{
-			onSettled: () => {
-				setEmail("");
-				setPassword("");
-			},
-		}
-	);
+	const { login, isLogin } = useLogin();
+	const [email, setEmail] = useState(""); //ogunneyeoyinkansola@gmail.com
+	const [password, setPassword] = useState(""); //ogunneyerasheedat
+
+	function handleSubmit(e) {
+		e.preventDefault();
+		login(
+			{ email, password },
+			{
+				onSettled: () => {
+					setEmail("");
+					setPassword("");
+				},
+			}
+		);
 	}
 
-  return (
+	return (
 		<form onSubmit={handleSubmit}>
 			<Input
 				type="email"
@@ -41,7 +41,7 @@ export default function LoginForm() {
 				disabled={isLogin}
 			/>
 			<Button type="secondary" disabled={!email.trim() || !password.trim() === " " || isLogin}>
-				{!isLogin ?  "Login" : <Loader />}
+				{!isLogin ? "Login" : <Loader />}
 			</Button>
 		</form>
 	);

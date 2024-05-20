@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
+import { HiArrowUp } from "react-icons/hi";
+import { useSearchParams } from "react-router-dom";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { useQueryClient } from "@tanstack/react-query";
+
 import DishItem from "./DishItem";
 import DishList from "./DishList";
 import useDish from "./useDish";
 import Filter from "../../UI/Filter";
-import { useSearchParams } from "react-router-dom";
 import PageSpinner from "../../UI/PageSpinner";
 import Button from "../../UI/Button";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { useQueryClient } from "@tanstack/react-query";
 import Loader from "../../UI/Loader";
 
 export default function AllMenus() {
@@ -147,7 +149,7 @@ export default function AllMenus() {
 					<div className="fixed bottom-10 right-8 z-50">
 						{isVisible && (
 							<Button type="round" onClick={scrollToTop}>
-								+
+								<HiArrowUp />
 							</Button>
 						)}
 					</div>

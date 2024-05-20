@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-export default function Button({ children, disabled, to, type, onClick, ...rest }) {
+export default function Button({ children, disabled, to, type, onClick, href, ...rest }) {
 	const base =
 		"bg-orange-500 text-white text-center text-base font-semibold px-6 py-2 block transition-colors duration-300 focus:bg-orange-100 focus:text-black focus:outline-none focus:ring focus:ring-orange-300 focus:ring-offset-2 disabled:cursor-not-allowed tracking-wide";
 		const styles = {
@@ -18,10 +18,11 @@ export default function Button({ children, disabled, to, type, onClick, ...rest 
 		);
 	if (onClick)
 		return (
-			<button onClick={onClick} disabled={disabled} className={styles[type]}>
+			<button onClick={onClick} disabled={disabled} className={styles[type]} {...rest}>
 				{children}
 			</button>
 		);
+		if(href) return (<a href={href} disabled={disabled} className={styles[type]} {...rest}>{children}</a>)
 	return (
 		<button disabled={disabled} className={styles[type]} {...rest}>
 			{children}
@@ -31,9 +32,10 @@ export default function Button({ children, disabled, to, type, onClick, ...rest 
 
 Button.propTypes = {
 	children: PropTypes.any,
-	disabled: PropTypes.any,
-	to: PropTypes.any,
-	type: PropTypes.any,
-	onClick: PropTypes.any,
-	rest: PropTypes.any
+	disabled: PropTypes.bool,
+	to: PropTypes.string,
+	type: PropTypes.oneOf(["primary", "small", "secondary", "round"]),
+	onClick: PropTypes.func,
+	rest: PropTypes.object,
+	href: PropTypes.string
 };

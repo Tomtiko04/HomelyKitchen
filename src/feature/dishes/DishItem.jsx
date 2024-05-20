@@ -8,7 +8,7 @@ import { useCart } from "../cart/useCart.js";
 import Cookies from "js-cookie";
 
 export default function DishItem({ dish }) {
-	const {id} = dish
+	const id = dish?.id
 	const { mutate, isAdding } = useAddToCart();
 	const {cart} = useCart();
 	const cartCheck = cart?.cart
