@@ -25,16 +25,20 @@ export default function CartList() {
 					{!cart?.cart.length == 0 ? (
 						<>
 							<ul className="divide-y divide-stone-200 border-b w-full lg:w-10/12 lg:mx-auto">
-								<h1 className="text-2xl text-black font-bold py-5 text-center">Delicious in the cart</h1>
+								<h1 className="text-2xl text-black font-bold py-5 text-center">
+									Delicious in the cart
+								</h1>
 								{cart?.cart.map((item) => (
 									<CartItem key={item.id} item={item} isLoading={isPending} />
 								))}
 							</ul>
-							<p className="flex flex-row justify-end font-semibold py-4 w-full lg:w-10/12 lg:mx-auto">
+							<p className="flex flex-row justify-end font-semibold pt-5 pb-3 w-full lg:w-10/12 lg:mx-auto px-5 md:px-0">
 								Total Price: {formatCurrency(totalPrice)}
 							</p>
-							<div className="flex flex-row justify-end items-end gap-x-6 w-full lg:w-10/12 lg:mx-auto pt-3 py-8">
-								<Button type="primary" onClick={()=> navigate("/menus/all")}>Add more</Button>
+							<div className="flex flex-row justify-end items-end gap-x-6 w-full lg:w-10/12 lg:mx-auto pt-3 py-8 px-5 md:px-0">
+								<Button type="primary" onClick={() => navigate("/menus/all")}>
+									Add more
+								</Button>
 								<PaywithFlutterwave />
 							</div>
 						</>

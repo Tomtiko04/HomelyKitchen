@@ -24,6 +24,8 @@
      justify-content: center;
      align-items: center;
       margin: 0 auto;
+      row-gap: 2rem;
+      padding-block: 10rem;
 }
 
   /* https://dev.to/afif/i-made-100-css-loaders-for-your-next-project-4eje */

@@ -17,7 +17,7 @@ export default function CartItem({ item, isLoading }) {
 			{isLoading ? (
 				<PageSpinner />
 			) : (
-				<li className="py-3 sm:flex sm:justify-between sm:items-center">
+				<li className="py-3 sm:flex sm:justify-between sm:items-center px-5 md:px-0">
 					<div className="flex lg:flex-row lg:justify-center lg:items-center gap-x-5 flex-col">
 						<div>
 							<img className="w-24 h-24 rounded-full block" src={image} alt={product_name} />
