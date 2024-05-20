@@ -1,9 +1,23 @@
+import Cookies from "js-cookie";
+
 import { useUser } from "../../context/useUser";
+
 import Button from "../../UI/Button";
 import UserPannelInfo from "../../UI/UserPannelInfo";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
 	const {state} = useUser();
+	const navigate = useNavigate();
+	const isAuthenticated = Cookies.get("authenticated");
+
+	function handleOrderNow() {
+		if (isAuthenticated === "authenticated") {
+			navigate("/menus/all");
+		} else {
+			navigate("/auth/login");
+		}
+	}
   return (
 		<section className="xl:pt-32 lg:pt-24 pt-24 pb-5 px-5 sm:px-14 xl:px-[5.6em]" id="home">
 			<div className="flex flex-col gap-y-4 flex-wrap justify-items-center justify-between lg:flex-row">
@@ -19,7 +33,7 @@ export default function Home() {
 						your cravings anytime, anywhere!
 					</p>
 					<div className="flex justify-start items-start mt-5">
-						<Button href="/menus/all" type="primary">
+						<Button onClick={handleOrderNow} type="primary">
 							Order now
 						</Button>
 					</div>
