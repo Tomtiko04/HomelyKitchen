@@ -4,7 +4,7 @@ import { LiaFacebookF } from "react-icons/lia";
 export default function Footer() {
 	let date = new Date().getFullYear();
 	return (
-		<div className="bg-[rgb(255,148,102)] text-white mt-5 w-full">
+		<div className="bg-[rgb(255,148,102)] text-white mt-5 w-full overflow-x-hidden">
 			<div className=" mx-auto px-5 sm:px-14 xl:px-[5.6em] pt-6 pb-24">
 				<div className="max-w-7xl grid gap-y-5 mt-10 md:grid-cols-3 md:gap-x-5">
 					<div className="flex flex-col md:px-0 md:py-0 gap-y-4">

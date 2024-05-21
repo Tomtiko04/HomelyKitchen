@@ -30,7 +30,7 @@ export default function WhyChooseUs() {
 	
 	return (
 		<>
-			<div className="w-full sm:px-0 lg:w-10/12 lg:mx-auto md:pt-16 pt-10 pb-3" id="whyChooseUs">
+			<div className="w-full sm:px-0 lg:w-10/12 lg:mx-auto md:pt-16 pt-10 pb-3 overflow-x-hidden" id="whyChooseUs">
 				<h1 className="text-center text-[2rem] text-orange-500 font-bold">Why choose us</h1>
 				<p className="text-center text-lg">
 					Enjoy the extraordinary - seamless food ordering,

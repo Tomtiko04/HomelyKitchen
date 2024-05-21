@@ -1,10 +1,10 @@
 
 export default function GetApp() {
   return (
-		<div className="w-full sm:px-14 xl:px-[5.6em] md:pt-16 px-5 pb-3 pt-10">
+		<div className="w-full sm:px-14 xl:px-[5.6em] md:pt-16 px-5 pb-3 pt-10 overflow-x-hidden">
 			<h1 className="text-center text-[2rem] text-orange-500 font-bold">Get our mobile app</h1>
 			<p className="text-center text-lg">Take your Experience to the Next Level.</p>
-			<div className="flex flex-col flex-wrap justify-items-center justify-between lg:gap-y-4 lg:flex-row">
+			<div className="flex flex-col flex-wrap justify-items-center justify-between lg:gap-y-4 lg:flex-row overflow-x-hidden">
 				<div className="w-full xl:w-1/2 lg:w-1/2 md:w-1/1 mt-8">
 					<p className=" text-xl leading-[40px] text-left md:text-center lg:text-left mt-3">
 						Discover a healthier, more affordable alternative to takeaway food with our app. From
