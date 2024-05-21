@@ -8,8 +8,8 @@ import Loader from "../../UI/Loader";
 
 export default function LoginForm() {
 	const { login, isLogin } = useLogin();
-	const [email, setEmail] = useState(""); //ogunneyeoyinkansola@gmail.com
-	const [password, setPassword] = useState(""); //ogunneyerasheedat
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
 
 	function handleSubmit(e) {
 		e.preventDefault();

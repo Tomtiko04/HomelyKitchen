@@ -6,25 +6,40 @@ import { useEffect, useState } from "react";
 import useDeleteCart from "../cart/useDeleteCart.js";
 import { useCart } from "../cart/useCart.js";
 import Cookies from "js-cookie";
+import toast from "react-hot-toast";
+// import { useNavigate } from "react-router-dom";
 
 export default function DishItem({ dish }) {
 	const id = dish?.id
-	const { mutate, isAdding } = useAddToCart();
 	const {cart} = useCart();
-	const cartCheck = cart?.cart
+	const { mutate, isAdding } = useAddToCart();
 	const { deleteCart, isDeleting } = useDeleteCart();
+	const cartCheck = cart?.cart;
+
 	const [isAdded, setIsAdded] = useState(false);
+	// const navigate = useNavigate("");
+
 	const userid = Cookies.get("userId");
 	const userName = Cookies.get("userName");
+	const isAuthenticated = Cookies.get("authenticated");
 
 	function handleClickAdd(quantity, price, product_name, user_id, user_name, product_id, image) {
+		if(isAuthenticated) {
 		mutate({ quantity, price, product_name, user_id, user_name, product_id, image });
 		setIsAdded(!isAdded);
+		} else {
+			toast.error("Login to Add Item to Cart.")
+			// navigate("/auth/login");
+		}
 	}
 
 	function handleClickDelete(product_id) {
-		deleteCart(product_id);
-		setIsAdded(!isAdded);
+		if(isAuthenticated) {
+			deleteCart(product_id);
+			setIsAdded(!isAdded);
+		} else{
+			toast.error("Item can't be removed from cart")
+		}
 	}
 
 	useEffect(function(){

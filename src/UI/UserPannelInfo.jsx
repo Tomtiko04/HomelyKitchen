@@ -9,9 +9,20 @@ export default function UserPannelInfo() {
 	const userEmail = Cookies.get("userEmail");
 	const {dispatch} = useUser()
 	const navigate = useNavigate();
+	function handleLogout() {
+		const cookiesToRemove = ["authenticated", "userEmail", "userName", "userId"];
+
+		cookiesToRemove.forEach((cookie) => Cookies.remove(cookie));
+
+		dispatch({ type: "closePanel" });
+
+		window.location.reload();
+
+		navigate("/home");
+	}
 	
 	return ReactDOM.createPortal(
-		<div className="absolute right-10 top-[95px] bg-white px-3 py-3 rounded-lg shadow">
+		<div className="absolute right-10 top-[95px] bg-white px-3 py-3 rounded-lg shadow z-50">
 			<div className="flex flex-col justify-between gap-y-2">
 				<div className="text-2xl flex justify-end">
 					<VscClose className="cursor-pointer hover:text-orange-500" onClick={()=> dispatch({
@@ -22,7 +33,7 @@ export default function UserPannelInfo() {
 					<p className="text-gray-600 px-3 font-medium text-medium">{userEmail}</p>
 				</div>
 				<div
-					onClick={()=> {dispatch({ type: "closePanel" }); navigate("/home"); Cookies.remove("authenticated", );}}
+					onClick={handleLogout}
 					className="flex flex-row items-center justify-center gap-x-1 cursor-pointer font-semibold text-orange-500">
 					<HiArrowLeftStartOnRectangle className="text-2xl" />
 					<p>Logout</p>
