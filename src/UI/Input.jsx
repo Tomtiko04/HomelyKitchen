@@ -8,9 +8,10 @@ Input.propTypes = {
 	maxLength: PropTypes.any,
 	disabled: PropTypes.any,
 	required: PropTypes.any,
+	name: PropTypes.string
 };
 
-export default function Input({placeholder, type, value, onChange, maxLength, disabled, required}) {
+export default function Input({placeholder, type, value, onChange, maxLength, disabled, required, name}) {
   return (
 		<input
 			type={type}
@@ -22,6 +23,8 @@ export default function Input({placeholder, type, value, onChange, maxLength, di
 			maxLength={maxLength}
 			disabled={disabled}
 			required={required}
+			autoComplete= 'off'
+			name={name}
 		/>
 	);
 }

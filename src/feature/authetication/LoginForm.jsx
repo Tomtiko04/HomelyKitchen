@@ -32,6 +32,7 @@ export default function LoginForm() {
 				value={email}
 				onChange={(e) => setEmail(e.target.value)}
 				disabled={isLogin}
+				name="email"
 			/>
 			<Input
 				type="password"
@@ -39,6 +40,7 @@ export default function LoginForm() {
 				value={password}
 				onChange={(e) => setPassword(e.target.value)}
 				disabled={isLogin}
+				name="password"
 			/>
 			<Button type="secondary" disabled={!email.trim() || !password.trim() === " " || isLogin}>
 				{!isLogin ? "Login" : <Loader />}

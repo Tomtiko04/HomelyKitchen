@@ -108,6 +108,8 @@ export default function AllMenus() {
 						placeholder="Search"
 						value={query}
 						onChange={(e) => setQuery(e.target.value)}
+						autoComplete="off"
+						name="search"
 					/>
 				</form>
 				<Filter

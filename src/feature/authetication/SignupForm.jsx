@@ -67,6 +67,7 @@ export default function SignupForm() {
 				maxLength={7}
 				value={userName}
 				onChange={(e) => setUserName(e.target.value)}
+				name="userName"
 			/>
 			{userNameError && <p className="text-red-500 mt-[-8px]">{userNameError}</p>}
 			<Input
@@ -75,6 +76,7 @@ export default function SignupForm() {
 				value={email}
 				onChange={(e) => setEmail(e.target.value)}
 				disable={isSignup}
+				name="email"
 			/>
 			{emailError && <p className="text-red-500 mt-[-8px]">{emailError}</p>}
 			<Input
@@ -83,6 +85,7 @@ export default function SignupForm() {
 				disable={isSignup}
 				value={password}
 				onChange={(e) => setPassword(e.target.value)}
+				name="password"
 			/>
 			{passwordError && <p className="text-red-500 mt-[-8px]">{passwordError}</p>}
 			{/* <Input

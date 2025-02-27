@@ -30,8 +30,11 @@ export default function NewsLetter() {
 				<input
 					className="border border-gray-400 px-2 py-[0.7em] rounded-lg outline-none focus:border-orange-500 focus:border-2 w-[330px]"
 					value={value}
+					name="email"
+					autoComplete="off"
 					onChange={handleChange}
 					placeholder="Enter Your Email"
+					type="email"
 				/>
 				<div className="right-[4px] absolute">
 					<Button
