@@ -13,7 +13,7 @@ export function useSignup() {
 		}),
 		onSuccess: () => {
 			toast.success(
-				"Account successfully created! Please verify the new account from the user's email address."
+				"Your account has been successfully created! Please proceed to log in with your credentials."
 			);
 			navigate("/auth/login", {replace: true})
 		},

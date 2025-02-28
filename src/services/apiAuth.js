@@ -14,7 +14,6 @@ const { data, error } = await supabase.auth.signUp({
 
 if(error) throw new Error(error.message)
 
-console.log(data);
 return data;
 }
 
