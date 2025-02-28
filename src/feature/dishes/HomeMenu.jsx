@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 
 import Button from "../../UI/Button";
 import DishItem from "./DishItem";
@@ -11,17 +11,22 @@ import { shuffleArray } from "../../utils/ShuffleArray";
 export default function HomeMenu() {
 	const { data } = useDish();
 	const navigate = useNavigate();
-	const isAuthenticated = Cookies.get("authenticated");
+	// const isAuthenticated = Cookies.get("authenticated");
 	const seed = new Date().toISOString().slice(0, Array(data).length);
 	const shuffledDishes = data ? shuffleArray(data?.dish, seed) : [];
 
+	// function handleSeeMore() {
+	// 	if (isAuthenticated === "authenticated") {
+	// 		navigate("/menus/all");
+	// 	} else {
+	// 		navigate("/auth/login");
+	// 	}
+	// }
+
 	function handleSeeMore() {
-		if (isAuthenticated === "authenticated") {
-			navigate("/menus/all");
-		} else {
-			navigate("/auth/login");
-		}
+		navigate("/menus/all");
 	}
+
 	return (
 		// <div
 		// 	className="w-full px-1 lg:w-10/12 lg:mx-auto md:pt-16 pt-10 overflow-x-hidden pb-5"
