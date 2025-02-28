@@ -59,9 +59,10 @@ function App() {
 							<Route
 								path="menus/all"
 								element={
-									<ProtectedRoute>
-										<RedirectToMenusWithDefaultParams />
-									</ProtectedRoute>
+									// <ProtectedRoute>
+									// 	<RedirectToMenusWithDefaultParams />
+									// </ProtectedRoute>
+									<RedirectToMenusWithDefaultParams />
 								}
 							/>
 							<Route

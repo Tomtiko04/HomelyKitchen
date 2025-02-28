@@ -16,7 +16,7 @@ export default function UserPannelInfo() {
 
 		dispatch({ type: "closePanel" });
 
-		window.location.reload();
+		// window.location.reload();
 
 		navigate("/home");
 	}

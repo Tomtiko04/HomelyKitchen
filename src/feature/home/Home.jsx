@@ -1,4 +1,4 @@
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 
 import { useUser } from "../../context/useUser";
 
@@ -7,18 +7,23 @@ import UserPannelInfo from "../../UI/UserPannelInfo";
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {
-	const {state} = useUser();
+	const { state } = useUser();
 	const navigate = useNavigate();
-	const isAuthenticated = Cookies.get("authenticated");
+	// const isAuthenticated = Cookies.get("authenticated");
+
+	// function handleOrderNow() {
+	// 	if (isAuthenticated === "authenticated") {
+	// 		navigate("/menus/all");
+	// 	} else {
+	// 		navigate("/auth/login");
+	// 	}
+	// }
 
 	function handleOrderNow() {
-		if (isAuthenticated === "authenticated") {
-			navigate("/menus/all");
-		} else {
-			navigate("/auth/login");
-		}
+		navigate("/menus/all");
 	}
-  return (
+
+	return (
 		<section className="xl:pt-32 lg:pt-24 pt-24 pb-5 px-5 sm:px-14 xl:px-[5.6em]" id="home">
 			<div className="flex flex-col gap-y-4 flex-wrap justify-items-center justify-between lg:flex-row">
 				<div className="w-full xl:w-1/2 lg:w-1/2 md:w-1/1">
