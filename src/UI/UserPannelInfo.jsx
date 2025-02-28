@@ -22,7 +22,7 @@ export default function UserPannelInfo() {
 	}
 	
 	return ReactDOM.createPortal(
-		<div className="absolute right-10 top-[95px] bg-white px-3 py-3 rounded-lg shadow z-50">
+		<div className="fixed right-10 top-[95px] bg-white px-3 py-3 rounded-lg shadow z-50">
 			<div className="flex flex-col justify-between gap-y-2">
 				<div className="text-2xl flex justify-end">
 					<VscClose className="cursor-pointer hover:text-orange-500" onClick={()=> dispatch({

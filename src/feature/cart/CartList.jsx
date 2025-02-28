@@ -8,9 +8,12 @@ import EmptyCart from "./EmptyCart";
 import { useCart } from "./useCart";
 // import { PaymentWithPaystack } from "../payment/paystack/config";
 import PaywithFlutterwave from "../payment/paystack/flutterwave";
+import UserPannelInfo from "../../UI/UserPannelInfo";
+import { useUser } from "../../context/useUser";
 
 export default function CartList() {
   const { cart, isPending } = useCart();
+  const {state}= useUser();
   const navigate = useNavigate()
   const totalPrice = cart?.cart?.reduce((acc, item)=> {
 	return (acc += item.total_price);
@@ -45,6 +48,7 @@ export default function CartList() {
 					) : (
 						<EmptyCart />
 					)}
+					<div>{state.openPanel && <UserPannelInfo />}</div>
 				</>
 			)}
 		</>

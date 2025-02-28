@@ -11,6 +11,8 @@ import Filter from "../../UI/Filter";
 import PageSpinner from "../../UI/PageSpinner";
 import Button from "../../UI/Button";
 import Loader from "../../UI/Loader";
+import { useUser } from "../../context/useUser";
+import UserPannelInfo from "../../UI/UserPannelInfo";
 
 export default function AllMenus() {
 	const queryClient = useQueryClient();
@@ -21,8 +23,8 @@ export default function AllMenus() {
 
 	const [page, setPage] = useState(1);
 
-
 	const { data, isLoading } = useDish(page);
+	const { state } = useUser();
 
 	const filterValue = searchParams.get("type") || "all";
 	const queryValue = searchParams.get("search") || "";
@@ -64,7 +66,7 @@ export default function AllMenus() {
 	function handleSeeMore() {
 		setPage(page + 1);
 	}
-	
+
 	let sortedItem = [];
 
 	if (filterValue === "all") sortedItem = data?.dish;
@@ -155,6 +157,7 @@ export default function AllMenus() {
 							</Button>
 						)}
 					</div>
+					<div>{state.openPanel && <UserPannelInfo />}</div>
 				</>
 			)}
 		</div>
