@@ -7,7 +7,7 @@ export default function useAddToCart() {
 	const {  mutate, isPending:isAdding } = useMutation({
 		mutationFn: AddToCartApi,
 		onSuccess: () => {
-			toast.success("Add to Cart");
+			toast.success("Item added to cart!");
 			queryClient.invalidateQueries({
 				queryKey: ["cart"],
 			});
